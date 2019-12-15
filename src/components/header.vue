@@ -1,26 +1,25 @@
 <template>
-  <div>
-    <header>
-      <Header />
-    </header>
-    <main>
-      <div class="container">
-        <RouterView />
-      </div>
-    </main>
+  <div id="header">
+    <h1>じゃんけんゲーム</h1>
+    <nav>
+      <RouterLink to="/game">
+        ゲーム
+      </RouterLink>
+      <RouterLink to="/score">
+        せいせき
+      </RouterLink>
+    </nav>
   </div>
 </template>
-<script>
-import Header from './components/header.vue'
 
+<script>
 export default {
-  components: {
-    Header
-  }
+  name: 'header'
 }
 </script>
+
 <style>
-#app {
+#header {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

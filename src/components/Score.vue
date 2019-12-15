@@ -1,26 +1,17 @@
 <template>
-  <div>
-    <header>
-      <Header />
-    </header>
-    <main>
-      <div class="container">
-        <RouterView />
-      </div>
-    </main>
+  <div id="score">
+    <h1>成績</h1>
   </div>
 </template>
-<script>
-import Header from './components/header.vue'
 
+<script>
 export default {
-  components: {
-    Header
-  }
+  name: 'score'
 }
 </script>
+
 <style>
-#app {
+#score {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
