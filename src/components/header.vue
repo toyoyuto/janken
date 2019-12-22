@@ -1,5 +1,5 @@
 <template>
-  <div id="header">
+  <div id="headerRouter">
     <h1>じゃんけんゲーム</h1>
     <nav>
       <RouterLink to="/game">
@@ -14,12 +14,12 @@
 
 <script>
 export default {
-  name: 'header'
+  name: 'headerRouter'
 }
 </script>
 
 <style>
-#header {
+#headerRouter {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
