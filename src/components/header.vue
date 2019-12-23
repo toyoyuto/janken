@@ -22,8 +22,9 @@ export default {
   },
   watch: {
     count (val) {
-      if (val >= 10) {
+      if (val === 10) {
         this.$router.push('/score')
+        this.$store.dispatch('score/createResultMessage')
       }
     }
   }

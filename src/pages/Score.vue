@@ -2,6 +2,9 @@
   <div id="score">
     <h1>成績</h1>
     <div><button type="button" v-on:click.prevent="dataReset">クリア</button></div>
+    <div v-show="resultMessage">
+      <label>結果</label>{{ resultMessage }}
+    </div>
     <div>
       <label>試合数</label>{{ count }}
     </div>
@@ -28,6 +31,9 @@ export default {
     },
     count () {
       return this.$store.state.score.count
+    },
+    resultMessage () {
+      return this.$store.state.score.resultMessage
     }
   },
   methods: {

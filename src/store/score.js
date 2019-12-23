@@ -5,7 +5,8 @@ const getDefaultState = () => {
   return {
     score: 0,
     count: 0,
-    gameResults: []
+    gameResults: [],
+    resultMessage: ''
   }
 }
 
@@ -25,6 +26,9 @@ const mutations = {
     state.score =
       state.gameResults.filter(item => item.result === CONST.JANKEN_MESSAGE_WIN).length
   },
+  setResultMessage (state, resultMessage) {
+    state.resultMessage = resultMessage
+  },
   clearState (state) {
     Object.assign(state, getDefaultState())
   }
@@ -34,6 +38,18 @@ const actions = {
   clearState (context) {
     context.commit('clearState')
     context.commit('game/clearState', null, { root: true })
+  },
+  createResultMessage (context) {
+    let resultMessage
+    if (context.state.score >= 8) {
+      resultMessage = '完敗！'
+    } else if (context.state.score >= 4) {
+      resultMessage = 'つよいです！'
+    } else {
+      resultMessage = 'よわい'
+    }
+
+    context.commit('setResultMessage', resultMessage)
   }
 }
 
