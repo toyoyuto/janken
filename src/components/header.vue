@@ -2,7 +2,7 @@
   <div id="headerRouter">
     <h1>じゃんけんゲーム</h1>
     <nav>
-      <RouterLink to="/game">
+      <RouterLink to="/game" v-show="count < 10">
         ゲーム
       </RouterLink>
       <RouterLink to="/score">
@@ -14,8 +14,21 @@
 
 <script>
 export default {
-  name: 'headerRouter'
+  name: 'hearerRouter',
+  computed: {
+    count () {
+      return this.$store.state.score.count
+    }
+  },
+  watch: {
+    count (val) {
+      if (val >= 10) {
+        this.$router.push('/score')
+      }
+    }
+  }
 }
+
 </script>
 
 <style>

@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    fight: function (myHand) {
+    fight (myHand) {
       this.$store.dispatch('game/fight', myHand)
     }
   }

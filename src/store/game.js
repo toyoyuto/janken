@@ -1,20 +1,26 @@
 import * as CONST from '@/common/constant'
 
-const state = {
-  hand: [
-    CONST.JANKEN_HAND_GU,
-    CONST.JANKEN_HAND_CYOKI,
-    CONST.JANKEN_HAND_PAR
-  ],
-  enemyHand: '',
-  enemyHandImage: '',
-  result: 'いざ勝負!',
-  imgList: [
-    require('@/assets/imgs/gu.png'),
-    require('@/assets/imgs/cyoki.png'),
-    require('@/assets/imgs/par.png')
-  ]
+// 初期化のしやすいように加工
+const getDefaultState = () => {
+  return {
+    hand: [
+      CONST.JANKEN_HAND_GU,
+      CONST.JANKEN_HAND_CYOKI,
+      CONST.JANKEN_HAND_PAR
+    ],
+    enemyHand: '',
+    enemyHandImage: '',
+    result: 'いざ勝負!',
+    imgList: [
+      require('@/assets/imgs/gu.png'),
+      require('@/assets/imgs/cyoki.png'),
+      require('@/assets/imgs/par.png')
+    ]
+  }
 }
+
+// initial state
+const state = getDefaultState()
 
 const mutations = {
   setEnemyHand (state, enemyHand) {
@@ -25,6 +31,9 @@ const mutations = {
   },
   setResult (state, result) {
     state.result = result
+  },
+  clearState (state) {
+    Object.assign(state, getDefaultState())
   }
 }
 

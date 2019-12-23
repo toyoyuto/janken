@@ -33,6 +33,7 @@ const mutations = {
 const actions = {
   clearState (context) {
     context.commit('clearState')
+    context.commit('game/clearState', null, { root: true })
   }
 }
 
