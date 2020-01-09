@@ -5,9 +5,15 @@
       <div>
         じゃんけん
       </div>
-      <img @click="fight('ぐー')" :src="imgList[0]">
+      <!-- <img @click="fight('ぐー')" :src="imgList[0]">
       <img @click="fight('ちょき')" :src="imgList[1]">
-      <img @click="fight('ぱー')" :src="imgList[2]">
+      <img @click="fight('ぱー')" :src="imgList[2]"> -->
+      <JankenList
+      v-for="jankenItem in jankenList"
+      :key="jankenItem.id"
+      :jankenItem="jankenItem"
+      @fight="fight"
+    />
     </div>
     <!-- 敵の手 -->
     <div style="margin-top: 30px">
@@ -20,8 +26,25 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import * as CONST from '@/common/constant'
+// その場しか使わないコンポーネント練習用
+var JankenList = Vue.component('janken-list', {
+  props: ['jankenItem'],
+  methods: {
+    fight () {
+      this.$emit('fight', this.jankenItem.hand)
+    }
+  },
+  template: `
+  <img @click="fight" :src="jankenItem.img">
+  `
+})
 export default {
   name: 'game',
+  components: {
+    JankenList
+  },
   computed: {
     imgList () {
       return this.$store.state.game.imgList
@@ -34,6 +57,23 @@ export default {
     },
     result () {
       return this.$store.state.game.result
+    },
+    jankenList () {
+      return this.imgList.map((item, index) => {
+        let hand
+        if (index === 0) {
+          hand = CONST.JANKEN_HAND_GU
+        } else if (index === 1) {
+          hand = CONST.JANKEN_HAND_CYOKI
+        } else {
+          hand = CONST.JANKEN_HAND_PAR
+        }
+        return {
+          id: index,
+          img: item,
+          hand: hand
+        }
+      })
     }
   },
   methods: {

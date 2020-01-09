@@ -9,12 +9,18 @@
         せいせき
       </RouterLink>
     </nav>
+    <Logo />
   </div>
 </template>
 
 <script>
+import Logo from '../components/logo.vue'
+
 export default {
   name: 'hearerRouter',
+  components: {
+    Logo
+  },
   computed: {
     count () {
       return this.$store.state.score.count
