@@ -13,7 +13,12 @@
     </div>
     <ul v-if="gameResults">
       <li v-for="(gameResult, index) of gameResults"  v-bind:key="index">
-        <span>{{ (index + 1) }}:</span>{{ gameResult.hand }}{{ gameResult.result }}
+        <!-- <router-link :to="{ path: '/score/' + (index +1) + '/detail' }">
+          <span>{{ (index + 1) }}:</span>{{ gameResult.hand }}{{ gameResult.result }}
+        </router-link> -->
+         <router-link :to="{ name: 'ScoreDetail', params: { id: index, count: index + 1 }}" >
+          <span>{{ (index + 1) }}:</span>{{ gameResult.hand }}{{ gameResult.result }}
+        </router-link>
       </li>
     </ul>
   </div>

@@ -15,13 +15,31 @@
       @fight="fight"
     />
     </div>
+    <button @click="show = !show">
+      押して
+    </button>
     <!-- 敵の手 -->
-    <div style="margin-top: 30px">
+    <transition name="megumi">
+    <div style="margin-top: 30px" v-if="show">
       <h2>コンピューター</h2>
       <div>{{ enemyHand }}</div>
       <img :src="enemyHandImage">
     </div>
-    <h2>結果<br>{{ result }}</h2>
+    </transition>
+    <!-- <h2>結果<br>{{ result }}</h2> -->
+    <slotComp>
+      <h2 slot="result">
+        結果<br>{{ result }}
+      </h2>
+    </slotComp>
+    <slotComp2>
+      <template slot="slot1" slot-scope="p">
+        対戦相手の紹介です！{{ p.text }}
+      </template>
+      <template>
+        ユーザー
+      </template>
+    </slotComp2>
   </div>
 </template>
 
@@ -40,10 +58,33 @@ var JankenList = Vue.component('janken-list', {
   <img @click="fight" :src="jankenItem.img">
   `
 })
+// スロット練習用
+var slotComp = {
+  template: `
+    <div>
+      <h2><slot name="result">デフォルト</slot></h2>
+    </div>
+  `
+}
+var slotComp2 = {
+  template: `
+    <div>
+      <h2><slot name="slot1" text="対戦相手は"></slot></h2>
+      <h2><slot>デフォルト</slot>さんです。</h2>
+    </div>
+  `
+}
 export default {
   name: 'game',
   components: {
-    JankenList
+    JankenList,
+    slotComp,
+    slotComp2
+  },
+  data () {
+    return {
+      show: false
+    }
   },
   computed: {
     imgList () {
@@ -57,6 +98,9 @@ export default {
     },
     result () {
       return this.$store.state.game.result
+    },
+    count () {
+      return this.$store.state.score.count
     },
     jankenList () {
       return this.imgList.map((item, index) => {
@@ -80,6 +124,12 @@ export default {
     fight (myHand) {
       this.$store.dispatch('game/fight', myHand)
     }
+  },
+  watch: {
+    count: function (newVal, oldVal) {
+      // 試合数が変化したとき
+      this.show = true
+    }
   }
 }
 
@@ -93,5 +143,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.megumi-enter-active, .megumi-leave-active {
+  transition: opacity .5s;
+}
+
+.megumi-enter, .megumi-leave-to {
+  opacity: 0;
 }
 </style>
