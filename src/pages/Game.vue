@@ -2,12 +2,7 @@
   <div id="game">
     <!-- 自分の手 -->
     <div>
-      <div>
-        じゃんけん
-      </div>
-      <!-- <img @click="fight('ぐー')" :src="imgList[0]">
-      <img @click="fight('ちょき')" :src="imgList[1]">
-      <img @click="fight('ぱー')" :src="imgList[2]"> -->
+      <h2>自分</h2>
       <JankenList
       v-for="jankenItem in jankenList"
       :key="jankenItem.id"
